@@ -126,6 +126,13 @@ sample_id,original_text,modified_text,score,expert_score,expert_comments,annotat
 
 ## 🏗️ Architecture
 
+<!-- Replace with your custom architecture diagram -->
+![SF-ProbeEval Architecture](docs/images/Figure1_workflow.pdf)
+
+<!-- Alternative: Keep mermaid diagram as backup -->
+<details>
+<summary>View Text-based Architecture Diagram</summary>
+
 ```mermaid
 graph LR
     A[Raw Stories] --> B[Data Extraction]
@@ -136,6 +143,7 @@ graph LR
     F --> G[Quality Filtering]
     G --> H[Expert Annotations]
 ```
+</details>
 
 ### Pipeline Components
 
