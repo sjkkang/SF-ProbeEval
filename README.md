@@ -2,7 +2,7 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![arXiv](https://img.shields.io/badge/arXiv-2XXX.XXXXX-b31b1b.svg)](https://arxiv.org/abs/2XXX.XXXXX)
+
 
 A comprehensive evaluation dataset and pipeline for probing language model understanding of science fiction narratives through topic modeling, text infilling, and expert annotation.
 
@@ -54,19 +54,69 @@ python -m src.evaluation.create_expert_annotations \
 
 ## 📊 Dataset
 
-### Expert Annotations
+### Domain-Specific Corpus Construction
+
+This research employs a curated collection of early 20th-century science fiction texts to demonstrate the effectiveness of the proposed framework under challenging adaptation scenarios. The dataset comprises **531 documents** with approximately **18,618 text segments** and an estimated **35,000 distinct sentences** after comprehensive preprocessing and quality control. 
+
+The corpus represents a domain characterized by:
+- **🔬 Specialized Vocabulary**: Scientific and technical terminology unique to SF narratives
+- **✍️ Distinctive Stylistic Conventions**: Period-specific writing patterns and narrative structures  
+- **🧠 Domain-Specific Semantic Relationships**: Complex thematic and conceptual associations
+- **📈 Resource-Constrained Conditions**: Ideal testbed for domain adaptation methodologies
+
+### SF-ProbeEval: A Domain-Specific Probing Benchmark
+
+To evaluate embedding quality in early science fiction texts, this research constructs **SF-ProbeEval**, a specialized benchmark comprising **five probing tasks** tailored to pulp-era linguistic patterns. Each task contains **1000 test items** derived from the specialized domain corpus, capturing the unique challenges of historical science fiction text understanding. 
+
+SF-ProbeEval provides the **first standardized benchmark** for assessing sentence embedding quality in early 20th-century science fiction texts, addressing the gap in domain-specific evaluation frameworks for historical literary corpora.
+
+#### Construction Methodology
+SF-ProbeEval construction follows a **two-stage process**:
+1. **Automated Generation**: Rule-based algorithms and domain-specific linguistic patterns
+2. **Expert Validation**: Three experts from Department of English Language and Literature
+   - Focus on linguistic accuracy, difficulty appropriateness, and artifact elimination
+   - Independent evaluation by at least two reviewers per test item
+   - Disagreements resolved through consensus-building
+
+#### Probing Tasks
+
+| Task | Description |
+|------|-------------|
+| **Word Contents** | Identify science fiction terminology and archaic vocabulary, evaluating adaptation to period-specific lexicons including scientific devices, astronomical terms, and technological concepts from pulp-era narratives |
+| **Tree Depth** | Predict syntactic complexity levels in vintage prose, assessing understanding of elaborate sentence constructions characteristic of 1920s-1930s science fiction writing styles |
+| **BShift (Bigram Shift)** | Detect local syntactic perturbations in period-appropriate word sequences, measuring sensitivity to historical word order patterns and archaic grammatical structures |
+| **SOMO (Semantic Odd Man Out)** | Identify semantic anomalies within science fiction contexts, evaluating understanding of genre-specific relationships including scientific speculation and technological innovation concepts |
+| **Coord_Inv (Coordinate Inversion)** | Detect structural modifications in complex vintage sentences, assessing comprehension of elaborate discourse patterns typical of early science fiction literary style |
+
+### Probing Task Dataset
+- **🎯 Purpose**: Evaluating language model understanding of science fiction narratives
+- **📚 Source**: Amazing Stories magazine corpus (1926+)
+- **🔍 Task Types**: 5 specialized probing tasks (1000 items each)
+- **📊 Format**: Domain-specific linguistic pattern evaluation
+
+### Expert Annotations (Contrastive Learning Validation)
+- **🎯 Purpose**: Quality validation for contrastive learning dataset
 - **📋 Size**: 250 text pairs with balanced score distribution
 - **🎯 Score Range**: 1-5 (integer scores, equal stratification)
 - **🔍 Quality**: Multi-stage filtering for completeness and coherence
 - **📈 Balance**: 50 samples per score level (1-5)
 
-### Data Statistics
+### Dataset Statistics
+| Component | Count | Description |
+|-----------|-------|-------------|
+| **Raw Corpus** | 531 documents | Early 20th-century SF texts |
+| **Text Segments** | ~18,618 | Processed paragraph units |
+| **Distinct Sentences** | ~35,000 | After preprocessing & QC |
+| **Probing Pairs** | Variable | Language model evaluation |
+| **Expert Annotations** | 250 | Contrastive learning validation |
+
+### Filtering Statistics
 | Metric | Value |
 |--------|-------|
-| Total Samples | 250 |
-| Score Distribution | Equal (50 per score) |
+| Total Expert Samples | 250 |
+| Score Distribution | Equal (50 per score 1-5) |
 | Filtering Applied | 7.7% samples removed |
-| Source Corpus | Amazing Stories (1926+) |
+| Quality Criteria | Completeness + coherence |
 
 ### Sample Data Format
 ```csv
@@ -161,13 +211,12 @@ PreprocessConfig(
 
 ### Deduplication Strategy
 - **Primary Key**: `pair_id` deduplication
-- **Selection Criteria**: Highest hybrid similarity score retained
 - **Similarity Metrics**: Semantic + lexical + structural scoring
 
 ## 📈 Results & Evaluation
 
 ### Model Performance
-- **Topic Coherence**: C_v scores with enhanced preprocessing
+- **Topic Coherence**:  Scores with enhanced preprocessing
 - **Quality Improvement**: ~7.7% noise reduction through filtering
 - **Expert Agreement**: Balanced annotation distribution achieved
 
@@ -176,9 +225,6 @@ PreprocessConfig(
 2. **Quality Filtering**: Effective noise reduction without bias
 3. **Expert Validation**: Consistent annotation quality across score ranges
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md).
 
 ### Development Setup
 ```bash
@@ -195,22 +241,4 @@ black src/ tests/
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📚 Citation
-
-If you use SF-ProbeEval in your research, please cite:
-
-```bibtex
-@article{kang2025sfprobeeval,
-  title={SF-ProbeEval: Science Fiction Text Probing Evaluation Dataset},
-  author={Kang, Sujin and [Other Authors]},
-  journal={arXiv preprint arXiv:2XXX.XXXXX},
-  year={2025}
-}
-```
-
-## 🙋‍♀️ Contact & Support
-
-- **Author**: Sujin Kang
-- **Issues**: [GitHub Issues](https://github.com/sjkkang/SF-ProbeEval/issues)
 
