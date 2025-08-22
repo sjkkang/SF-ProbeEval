@@ -127,7 +127,7 @@ sample_id,original_text,modified_text,score,expert_score,expert_comments,annotat
 ## 🏗️ Architecture
 
 <!-- Replace with your custom architecture diagram -->
-![SF-ProbeEval Architecture](docs/images/Figure1_workflow.pdf)
+![SF-ProbeEval Architecture](docs/images/Figure1_workflow.png)
 
 <!-- Alternative: Keep mermaid diagram as backup -->
 <details>
